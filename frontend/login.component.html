@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="hu" ng-app="loginApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Bejelentkezés</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-material@1.2.5/angular-material.min.css">
+  <style>
+    body, html {
+      height: 100%;
+    }
+    .login-wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    md-card {
+      min-width: 320px;
+      padding: 16px 32px 32px;
+    }
+  </style>
+</head>
+<body layout="column" class="md-theme-indigo">
+  <div class="login-wrapper" ng-cloak>
+    <md-card>
+      <form name="loginForm" ng-submit="login()" novalidate ng-controller="LoginCtrl">
+        <h2 class="md-headline" style="text-align:center">Bejelentkezés</h2>
+
+        <md-input-container class="md-block">
+          <label>Felhasználónév</label>
+          <input type="text" name="username" ng-model="user.username" required>
+          <div ng-messages="loginForm.username.$error" role="alert">
+            <div ng-message="required">Kötelező mező</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label>Jelszó</label>
+          <input type="password" name="password" ng-model="user.password" required minlength="4">
+          <div ng-messages="loginForm.password.$error" role="alert">
+            <div ng-message="required">Kötelező mező</div>
+            <div ng-message="minlength">Minimum 4 karakter</div>
+          </div>
+        </md-input-container>
+
+        <div layout="row" layout-align="end center" style="margin-top:16px">
+          <md-button type="submit" class="md-raised md-primary" ng-disabled="loginForm.$invalid || loading">
+            Belépés
+          </md-button>
+        </div>
+
+        <div layout="row" layout-align="center center" ng-if="error" style="margin-top:12px">
+          <span style="color:#f44336">{{error}}</span>
+        </div>
+      </form>
+    </md-card>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/angular@1.8.2/angular.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/angular-animate@1.8.2/angular-animate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/angular-aria@1.8.2/angular-aria.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/angular-messages@1.8.2/angular-messages.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/angular-material@1.2.5/angular-material.min.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>
